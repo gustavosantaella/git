@@ -67,7 +67,8 @@ def git():
         elif(arg == "add"):
             git_command = f"{replace(arg)} -A"
         else:
-            git_command = replace(arg)
+            any_args = " ".join(args[2:])
+            git_command = f"{replace(arg)} {any_args}"
         
         print(f"Execunting command: {git_command}")
         console = subprocess.run(git_command, shell=True, check=True)
