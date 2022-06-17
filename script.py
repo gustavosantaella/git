@@ -38,7 +38,7 @@ def get_current_remote():
         if(current_branch in branch):
             return branch.split("/")[0]
         else:
-            return defaul_remote
+            return default_remote
 
 
 current_branch = get_current_branch()
