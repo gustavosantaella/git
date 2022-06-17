@@ -59,6 +59,8 @@ def git():
 
         if(arg == "push" or arg == "pull"): 
             git_command = f"{replace(arg)} {current_remote} {current_branch}"
+        elif(arg == "add"):
+            git_command = f"{replace(arg)} -A"
         else:
             git_command = replace(arg)
         
