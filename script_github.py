@@ -6,6 +6,7 @@ import argparse
 
 repo = Repository('./.');
 
+default_remote = 'origin'
 command = "git {command}"
 
 def get_current_branch():
@@ -32,9 +33,12 @@ def get_current_remote():
     current_remote = ""
     current_branch = get_current_branch()
     branches = get_remote_branches()
+
     for branch in branches:
         if(current_branch in branch):
             return branch.split("/")[0]
+        else:
+            return defaul_remote
 
 
 current_branch = get_current_branch()
@@ -46,11 +50,12 @@ def git():
 
     args = sys.argv
     if((len(args) == 1)):
-        return print("you haven't any  command")
+        return print("you don't provided any  command")
 
     arg  = args[1:][0]
     parser = argparse.ArgumentParser()
     parser.add_argument("-b", dest="branch_name", type=str, help="You have to write a branch name")
+    parser.add_argument("-m", dest="commit_message", type=str, help="Message")
     parser.add_argument("command", metavar="gc", type=str, nargs='+', help="any command from git")
     parse_args = parser.parse_args()
 
