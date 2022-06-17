@@ -6,6 +6,7 @@ import argparse
 
 repo = Repository('./.');
 
+default_remote = 'origin'
 command = "git {command}"
 
 def get_current_branch():
@@ -32,9 +33,12 @@ def get_current_remote():
     current_remote = ""
     current_branch = get_current_branch()
     branches = get_remote_branches()
+
     for branch in branches:
         if(current_branch in branch):
             return branch.split("/")[0]
+        else:
+            return defaul_remote
 
 
 current_branch = get_current_branch()
@@ -46,7 +50,7 @@ def git():
 
     args = sys.argv
     if((len(args) == 1)):
-        return print("you haven't any  command")
+        return print("you don't provided any  command")
 
     arg  = args[1:][0]
     parser = argparse.ArgumentParser()
@@ -59,8 +63,11 @@ def git():
 
         if(arg == "push" or arg == "pull"): 
             git_command = f"{replace(arg)} {current_remote} {current_branch}"
+        elif(arg == "add"):
+            git_command = f"{replace(arg)} -A"
         else:
-            git_command = replace(arg)
+            any_args = " ".join(args[2:])
+            git_command = f"{replace(arg)} {any_args}"
         
         print(f"Execunting command: {git_command}")
         console = subprocess.run(git_command, shell=True, check=True)
