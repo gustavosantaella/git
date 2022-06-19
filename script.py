@@ -54,7 +54,8 @@ def git():
 
     arg  = args[1:][0]
     parser = argparse.ArgumentParser()
-    parser.add_argument("-b", dest="branch_name", type=str, help="You have to write a branch name")
+    parser.add_argument("-b", required=False, dest="branch_name", type=str, help="You have to write a branch name")
+    parser.add_argument("-m", required=False, dest="messange_to_commit", type=str, help="Message to commit")
     parser.add_argument("command", metavar="gc", type=str, nargs='+', help="any command from git")
     parse_args = parser.parse_args()
 
